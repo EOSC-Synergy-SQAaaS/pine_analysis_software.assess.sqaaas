@@ -1,0 +1,58 @@
+config:
+  credentials: []
+  project_repos:
+    git.scc.kit.edu/gi2423/pine_analysis_software:
+      branch: main
+      repo: https://git.scc.kit.edu/gi2423/pine_analysis_software
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-rust-goat.sh
+        container: qc.acc_shabby-orange-bombay
+  QC.Doc:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-crimson-armadillo.sh
+        container: qc.doc_pokey-celadon-wallaby
+      git.scc.kit.edu/gi2423/pine_analysis_software git:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-copper-cichlid.sh
+        container: qc.doc_homey-thistle-lionfish
+      git.scc.kit.edu/gi2423/pine_analysis_software markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-tomato-ibis.sh
+        container: qc.doc_ugly-apricot-dollar
+  QC.Lic:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-coral-mouse.sh
+        container: qc.lic_cloudy-salmon-dalmatian
+  QC.Sec:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-sepia-harrier.sh
+        container: qc.sec_shaggy-pumpkin-duck
+  QC.Sty:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-ochre-squirt.sh
+        container: qc.sty_skimpy-turquoise-maltese
+  QC.Ver:
+    repos:
+      git.scc.kit.edu/gi2423/pine_analysis_software get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-burgundy-guppy.sh
+        container: qc.ver_sunny-ochre-cat
+timeout: 5400
